@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de WAR</title>
+    <style>
+body {
+    font-family: 'Arial', sans-serif;              
+    background-image: url(https://cdn.theathletic.com/app/uploads/2022/06/30093127/USATSI_18560414-scaled.jpg);
+    background-size: cover;              
+    color: #333;              
+    padding: 20px;          } 
+
+
+    h1 {             
+        text-align: center;             
+        color: #2c3e50;         } 
+
+        h2 {             
+        text-align: center;             
+        color: #2c3e50;         }
+
+        label {             
+            display: block;             
+            margin-top: 10px;             
+            font-weight: bold;         }
+    
+        input {             
+                width: calc(100% - 22px);             
+                padding: 10px;             
+                margin-top: 5px;             
+                border-radius: 31px;             
+                border: 1px solid #ccc;         }
+
+        .container {             
+        max-width: 600px;             
+        margin: auto;             
+        background-color: rgba(255, 255, 255, 0.7);           
+        border-radius: 31px;             
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);             
+        padding: 20px;         }
+
+        button {             
+                    background-color: #3498db;              
+                    color: white;              
+                    padding: 10px;              
+                    border: none;              
+                    border-radius: 31px;              
+                    cursor: pointer;              
+                    width: 100%;         }
+        
+        button:hover {             
+                    background-color: #2980b9;          }         
+                    
+        .resultado {             
+                        margin-top: 20px;             
+                        padding-top: 10px;             
+                        border-top: 2px solid #3498db;         }         
+                        
+        .resultado p {             
+                            font-size: 18px;         }
+
+        footer {            
+                             margin: auto;             
+                            background-color: rgba(255, 255, 255, 0.7);           
+                            border-radius: 31px;             
+                            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);             
+                            padding: 20px;         
+                               text-align: center;
+                               text-decoration: none; /* Sin subrayado */
+                            
+                            }
+                            footer a {
+                                        color: black; /* Mismo color que el texto */
+                                        text-decoration: none; /* Sin subrayado */
+}
+
+                            .copyright {
+                                text-align: center;
+                            }
+                        
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Calculadora de WAR</h1>
+
+    <label for="battingRuns">Batting Runs:</label>
+    <input type="number" id="battingRuns" placeholder="Número de Batting Runs"><br>
+
+    <label for="baseRunningRuns">Base Running Runs:</label>
+    <input type="number" id="baseRunningRuns" placeholder="Número de Base Running Runs"><br>
+
+    <label for="fieldingRuns">Fielding Runs:</label>
+    <input type="number" id="fieldingRuns" placeholder="Número de Fielding Runs"><br>
+
+    <label for="positionalAdjustment">Positional Adjustment:</label>
+    <input type="number" id="positionalAdjustment" placeholder="Positional Adjustment"><br>
+
+    <label for="leagueAdjustment">League Adjustment:</label>
+    <input type="number" id="leagueAdjustment" placeholder="League Adjustment"><br>
+
+    <label for="replacementRuns">Replacement Runs:</label>
+    <input type="number" id="replacementRuns" placeholder="Replacement Runs"><br>
+
+    <label for="runsPerWin">Runs Per Win:</label>
+    <input type="number" id="runsPerWin" placeholder="Runs Per Win"><br>
+
+    <button onclick="calcularWAR()">Calcular WAR</button>
+
+    <div class="resultado">
+        <h2>Resultados:</h2>
+        <p>WAR: <span id="war"></span></p>
+    </div>
+    </div>
+    <br>
+        <br>
+        <br>  
+        <footer>
+            <div class="copyright">
+            &copy; 2015-2024 Major League Baseball, Major League Baseball Advanced Media <br> <br>
+            </div>
+            Todo el contenido, estadísticas y datos presentados en este sitio web son propiedad de Major League Baseball (MLB) y MLB Advanced Media. 
+            Este sitio se proporciona únicamente con fines informativos y educativos. 
+            No está afiliado ni respaldado por MLB o MLB Advanced Media. 
+            Las estadísticas y análisis obtenibles aquí son de carácter educativo y no deben ser considerados como metodología oficial. 
+            Se recomienda consultar las fuentes oficiales de MLB (bien sea <a href="https://www.baseball-reference.com/">BaseballReference</a>, <a href="https://www.fangraphs.com/">FanGraphs</a>,<a href="https://www.espn.com/mlb/">ESPN</a> <a href="https://www.mlb.com/en/">o el mismo sitio web de la liga</a>) para información precisa y actualizada.
+        </footer>
+
+    <script>
+        function calcularWAR() {
+            const battingRuns = parseFloat(document.getElementById("battingRuns").value) || 0;
+            const baseRunningRuns = parseFloat(document.getElementById("baseRunningRuns").value) || 0;
+            const fieldingRuns = parseFloat(document.getElementById("fieldingRuns").value) || 0;
+            const positionalAdjustment = parseFloat(document.getElementById("positionalAdjustment").value) || 0;
+            const leagueAdjustment = parseFloat(document.getElementById("leagueAdjustment").value) || 0;
+            const replacementRuns = parseFloat(document.getElementById("replacementRuns").value) || 0;
+            const runsPerWin = parseFloat(document.getElementById("runsPerWin").value) || 1; // Evitar división por cero
+
+            const totalRuns = battingRuns + baseRunningRuns + fieldingRuns + positionalAdjustment + leagueAdjustment + replacementRuns;
+            const war = runsPerWin > 0 ? (totalRuns / runsPerWin).toFixed(2) : 'N/A';
+
+            document.getElementById("war").innerText = war;
+        }
+    </script>
+</body>
+</html>
